@@ -1,14 +1,14 @@
-const HeroBanner = () => {
+const HeroBanner = (interval, numOfPics) => {
   const heroBanner = document.querySelector('.hero-image .image');
+  let intervalHolder
 
   return {
-    rotateImages: (interval, numOfPics) => {
+    rotateImages: () => {
       let imageSelection = 0
-      setInterval(() => {
-        if (imageSelection > 4) {
-          imageSelection = 0
-        }
-        heroBanner.style.backgroundImage = `url("./images/hero-image-${(imageSelection++) % (numOfPics - 1)}.jpg")`
+      intervalHolder = setInterval(() => {
+        setTimeout( () => {
+          heroBanner.style.backgroundImage = `url("./images/hero-image-${(imageSelection++) % (numOfPics)}.jpg")`
+        }, 0)
       }, interval)
     }
   }
@@ -16,7 +16,7 @@ const HeroBanner = () => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  let heroBanner = HeroBanner()
-  heroBanner.rotateImages(1500, 4)
+  let heroBanner = HeroBanner(1500, 4)
+  heroBanner.rotateImages()
 })
 
